@@ -104,6 +104,10 @@ type Field struct {
 	// statement
 	ButtonText string `json:"button_text,omitempty"` // Sets the text of the button that jumps to the next field
 	HideMarks  bool   `json:"hide_marks,omitempty"`  // Boolean to indicate if the field should not be surrounded by quotation marks
+
+	// dropdown
+	// Choices
+	AlphabeticalOrder bool "alphabetical_order" // If the choices should be sorted in alphabetic order
 }
 
 //
@@ -123,6 +127,7 @@ const (
 	MultipleChoice FieldType = "multiple_choice"
 	PictureChoice  FieldType = "picture_choice"
 	Statement      FieldType = "statement"
+	Dropdown       FieldType = "dropdown"
 )
 
 //
