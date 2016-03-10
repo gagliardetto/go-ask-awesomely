@@ -87,17 +87,26 @@ type Field struct {
 	MaxCharacters int `json:"max_characters,omitempty"` // The maximum number of characters the respondent can type as an answer.
 
 	// multiple_choice
-	Choices                 []Choice `json:"choices"`                             // required, Array of choice objects with the choices that the respondent can select.
+	Choices                 []Choice `json:"choices,omitempty"`                   // required, Array of choice objects with the choices that the respondent can select.
 	AllowMultipleSelections bool     `json:"allow_multiple_selections,omitempty"` // Boolean to decide if the respondent can choose one or multiple choices
 	Randomize               bool     `json:"randomize,omitempty"`                 // If the choice order should be randomized on every load
 	VerticalAlignment       bool     `json:"vertical_alignment,omitempty"`        // If the choices should appear as one choice per row, instead of fitting as many choices as possible per row
 	AddOtherChoice          bool     `json:"add_other_choice,omitempty"`          // If the field should automatically include a choice with the text "Other" which transforms into a open ended text field
+
+	// picture_choice
+	ShowLabels bool `json:"show_labels,omitempty"` // If the labels should be visible beneath the choices or not.
+	// Choices
+	Supersize bool `json:"supersize,omitempty"` // If the pictures choice should be set to large. (Coming soon)
+	// AllowMultipleSelections
+	// Randomize
+	// AddOtherChoice
 }
 
 //
 
 type Choice struct {
-	Label string `json:"label"`
+	ImageID string `json:"image_id,omitempty"`
+	Label   string `json:"label"`
 }
 
 //
@@ -108,6 +117,7 @@ const (
 	ShortText      FieldType = "short_text"
 	LongText       FieldType = "long_text"
 	MultipleChoice FieldType = "multiple_choice"
+	PictureChoice  FieldType = "picture_choice"
 )
 
 //
