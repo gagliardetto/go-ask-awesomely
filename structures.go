@@ -108,6 +108,19 @@ type Field struct {
 	// dropdown
 	// Choices
 	AlphabeticalOrder bool "alphabetical_order" // If the choices should be sorted in alphabetic order
+
+	// number
+	MinValue int "min_value" // The minimum value your respondent can answer
+	MaxValue int "max_value" // The maximum value your respondent can answer
+
+	// rating
+	Steps int    "steps" // The number of steps the user can chose. Is limited to a value between 1 - 10
+	Shape string "shape" // The icon to use for the steps. Use the list in Typeform.com to get the icon you want. "Stars" in Typeform.com would be used as "stars".
+
+	// opinion_scale
+	// Steps // required, The number of steps in the scale. Maximum is 11 and minimum is 5
+	Labels     Labels "labels"       // An object, defining left, center and right labels
+	StartAtOne bool   "start_at_one" // If the scale should start at zero or one
 }
 
 //
@@ -115,6 +128,12 @@ type Field struct {
 type Choice struct {
 	ImageID string `json:"image_id,omitempty"`
 	Label   string `json:"label"`
+}
+
+type Labels struct {
+	Left   string `json:"left,omitempty"`
+	Center string `json:"center,omitempty"`
+	Right  string `json:"right,omitempty"`
 }
 
 //
@@ -128,6 +147,13 @@ const (
 	PictureChoice  FieldType = "picture_choice"
 	Statement      FieldType = "statement"
 	Dropdown       FieldType = "dropdown"
+	YesNo          FieldType = "yes_no"
+	Number         FieldType = "number"
+	Rating         FieldType = "rating"
+	OpinionScale   FieldType = "opinion_scale"
+	Email          FieldType = "email"
+	Website        FieldType = "website"
+	Legal          FieldType = "legal"
 )
 
 //
