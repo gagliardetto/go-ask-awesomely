@@ -100,6 +100,10 @@ type Field struct {
 	// AllowMultipleSelections
 	// Randomize
 	// AddOtherChoice
+
+	// statement
+	ButtonText string `json:"button_text,omitempty"` // Sets the text of the button that jumps to the next field
+	HideMarks  bool   `json:"hide_marks,omitempty"`  // Boolean to indicate if the field should not be surrounded by quotation marks
 }
 
 //
@@ -118,6 +122,7 @@ const (
 	LongText       FieldType = "long_text"
 	MultipleChoice FieldType = "multiple_choice"
 	PictureChoice  FieldType = "picture_choice"
+	Statement      FieldType = "statement"
 )
 
 //
