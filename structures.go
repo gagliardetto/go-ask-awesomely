@@ -158,7 +158,7 @@ const (
 
 //
 
-type Response struct {
+type FormInfo struct {
 	Links   []Link     `json:"_links"`
 	Fields  []Field    `json:"fields"`
 	ID      string     `json:"id"`
@@ -186,3 +186,29 @@ type NewImage struct {
 	Type        string `json:"type"`
 	Version     string `json:"version"`
 }
+
+//
+
+type ImageInfo struct {
+	Filename string `json:"filename"`
+	Height   int    `json:"height"`
+	ID       string `json:"id"`
+	Type     string `json:"type"`
+	URL      string `json:"url"`
+	Version  string `json:"version"`
+	Width    int    `json:"width"`
+}
+
+//
+
+type Design struct {
+	Colors struct {
+		Question   string `json:"question"`
+		Button     string `json:"button"`
+		Answer     string `json:"answer"`
+		Background string `json:"background"`
+	} `json:"colors"`
+	Font string `json:"font"`
+}
+
+type DesignInfo struct{}
