@@ -65,13 +65,14 @@ func (ct *Timestamp) MarshalJSON() ([]byte, error) {
 //
 
 type Form struct {
-	Title            string   `json:"title"`                        // required, The title of the typeform
-	Fields           []Field  `json:"fields"`                       // required, An array of Field objects
-	Tags             []string `json:"tags,omitempty"`               // An array of Tags
-	DesignID         string   `json:"design_id,omitempty"`          // The ID of the Design object you want to use
-	WebhookSubmitURL string   `json:"webhook_submit_url,omitempty"` // Where you want the responses to go to when a respondent submits the typeform
-	URLIDs           []string `json:"url_ids,omitempty"`            // The IDs of the URLs you want your form to be displayed at
-	Branding         bool     `json:"branding,omitempty"`           // Enables or disables the Typeform branding for the form
+	Title            string      `json:"title"`                        // required, The title of the typeform
+	Fields           []Field     `json:"fields"`                       // required, An array of Field objects
+	Tags             []string    `json:"tags,omitempty"`               // An array of Tags
+	DesignID         string      `json:"design_id,omitempty"`          // The ID of the Design object you want to use
+	WebhookSubmitURL string      `json:"webhook_submit_url,omitempty"` // Where you want the responses to go to when a respondent submits the typeform
+	URLIDs           []string    `json:"url_ids,omitempty"`            // The IDs of the URLs you want your form to be displayed at
+	Branding         bool        `json:"branding,omitempty"`           // Enables or disables the Typeform branding for the form
+	LogicJumps       []LogicJump `json:"logic_jumps"`
 }
 
 type Field struct {
@@ -230,4 +231,10 @@ type URLInfo struct {
 	FormID  string `json:"form_id"`
 	Version string `json:"version"`
 	Links   []Link `json:"_links"`
+}
+
+type LogicJump struct {
+	From string `json:"from"`
+	To   string `json:"to"`
+	If   bool   `json:"if"`
 }
