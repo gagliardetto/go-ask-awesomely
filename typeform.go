@@ -135,13 +135,37 @@ func (client *Client) GetImage(imageID string) (ImageInfo, error) {
 }
 
 func (client *Client) CreateDesign(newDesign Design) (DesignInfo, error) {
-	path := fmt.Sprintf("/%v/forms", client.APIVersion)
+	path := fmt.Sprintf("/%v/designs", client.APIVersion)
 	method := "POST"
 
 	headers := http.Header{}
 	queryParameters := url.Values{}
 	var bodyPayload interface{}
 	bodyPayload = newDesign
+
+	response, _, err := client.fetchAndReturnPage(path, method, headers, queryParameters, bodyPayload)
+	if err != nil {
+		return DesignInfo{}, err
+	}
+
+	fmt.Println(string(response))
+
+	var designInfo DesignInfo
+	err = json.Unmarshal(response, &designInfo)
+	if err != nil {
+		return DesignInfo{}, err
+	}
+	return designInfo, nil
+}
+
+func (client *Client) GetDesign(designID string) (DesignInfo, error) {
+
+	path := fmt.Sprintf("/%v/designs/%v", client.APIVersion, designID)
+	method := "GET"
+
+	headers := http.Header{}
+	queryParameters := url.Values{}
+	var bodyPayload interface{}
 
 	response, _, err := client.fetchAndReturnPage(path, method, headers, queryParameters, bodyPayload)
 	if err != nil {

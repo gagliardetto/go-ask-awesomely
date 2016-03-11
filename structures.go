@@ -211,4 +211,14 @@ type Design struct {
 	Font string `json:"font"`
 }
 
-type DesignInfo struct{}
+type DesignInfo struct {
+	ID     string `json:"id"`
+	Colors struct {
+		Question   string `json:"question"`
+		Button     string `json:"button"`
+		Answer     string `json:"answer"`
+		Background string `json:"background"`
+	} `json:"colors"`
+	Font    string `json:"font"`
+	Version string `json:"version"`
+}
