@@ -30,7 +30,7 @@ func (client *Client) fetchAndReturnPage(path string, method string, headers htt
 	requestURL.Path = path
 	requestURL.RawQuery = queryParameters.Encode()
 
-	if method != "GET" && method != "POST" && method != "PATCH" && method != "DELETE" {
+	if method != "GET" && method != "POST" && method != "PUT" && method != "PATCH" && method != "DELETE" {
 		return []byte(""), http.Header{}, fmt.Errorf("Method not supported: %v", method)
 	}
 

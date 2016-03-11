@@ -235,3 +235,33 @@ func (client *Client) GetURL(URLID string) (URLInfo, error) {
 	}
 	return URLInfoResponse, nil
 }
+
+func (client *Client) ModifyURL(URLID string) (URLInfo, error) {
+
+	path := fmt.Sprintf("/%v/urls/%v", client.APIVersion, URLID)
+	method := "PUT"
+
+	headers := http.Header{}
+	queryParameters := url.Values{}
+	var bodyPayload interface{}
+
+	var newURL struct {
+		FormID string `json:"form_id"` // is it form_id or url_id ????
+	}
+	newURL.FormID = URLID
+	bodyPayload = newURL
+
+	response, _, err := client.fetchAndReturnPage(path, method, headers, queryParameters, bodyPayload)
+	if err != nil {
+		return URLInfo{}, err
+	}
+
+	fmt.Println(string(response))
+
+	var newURLResponse URLInfo
+	err = json.Unmarshal(response, &newURLResponse)
+	if err != nil {
+		return URLInfo{}, err
+	}
+	return newURLResponse, nil
+}
