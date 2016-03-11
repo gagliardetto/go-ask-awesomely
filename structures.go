@@ -222,3 +222,12 @@ type DesignInfo struct {
 	Font    string `json:"font"`
 	Version string `json:"version"`
 }
+
+//
+
+type URLInfo struct {
+	ID      string `json:"id"`
+	FormID  string `json:"form_id"`
+	Version string `json:"version"`
+	Links   []Link `json:"_links"`
+}

@@ -181,3 +181,57 @@ func (client *Client) GetDesign(designID string) (DesignInfo, error) {
 	}
 	return designInfo, nil
 }
+
+func (client *Client) CreateURL(formID string) (URLInfo, error) {
+
+	path := fmt.Sprintf("/%v/urls", client.APIVersion)
+	method := "POST"
+
+	headers := http.Header{}
+	queryParameters := url.Values{}
+	var bodyPayload interface{}
+
+	var newURL struct {
+		FormID string `json:"form_id"`
+	}
+	newURL.FormID = formID
+	bodyPayload = newURL
+
+	response, _, err := client.fetchAndReturnPage(path, method, headers, queryParameters, bodyPayload)
+	if err != nil {
+		return URLInfo{}, err
+	}
+
+	fmt.Println(string(response))
+
+	var newURLResponse URLInfo
+	err = json.Unmarshal(response, &newURLResponse)
+	if err != nil {
+		return URLInfo{}, err
+	}
+	return newURLResponse, nil
+}
+
+func (client *Client) GetURL(URLID string) (URLInfo, error) {
+
+	path := fmt.Sprintf("/%v/urls/%v", client.APIVersion, URLID)
+	method := "GET"
+
+	headers := http.Header{}
+	queryParameters := url.Values{}
+	var bodyPayload interface{}
+
+	response, _, err := client.fetchAndReturnPage(path, method, headers, queryParameters, bodyPayload)
+	if err != nil {
+		return URLInfo{}, err
+	}
+
+	fmt.Println(string(response))
+
+	var URLInfoResponse URLInfo
+	err = json.Unmarshal(response, &URLInfoResponse)
+	if err != nil {
+		return URLInfo{}, err
+	}
+	return URLInfoResponse, nil
+}
