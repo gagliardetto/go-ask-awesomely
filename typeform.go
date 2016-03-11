@@ -79,3 +79,33 @@ func (client *Client) GetForm(formID string) (Response, error) {
 	}
 	return formInfo, nil
 }
+
+func (client *Client) CreateImage(imageURL string) (NewImage, error) {
+
+	path := fmt.Sprintf("/%v/images", client.APIVersion)
+	method := "POST"
+
+	headers := http.Header{}
+	queryParameters := url.Values{}
+	var bodyPayload interface{}
+
+	var newImage struct {
+		URL string `json:"url"`
+	}
+	newImage.URL = imageURL
+	bodyPayload = newImage
+
+	response, _, err := client.fetchAndReturnPage(path, method, headers, queryParameters, bodyPayload)
+	if err != nil {
+		return NewImage{}, err
+	}
+
+	fmt.Println(string(response))
+
+	var newImageResponse NewImage
+	err = json.Unmarshal(response, &newImageResponse)
+	if err != nil {
+		return NewImage{}, err
+	}
+	return newImageResponse, nil
+}

@@ -179,3 +179,10 @@ type URL struct {
 }
 
 ///
+
+type NewImage struct {
+	ID          string `json:"id"`
+	OriginalURL string `json:"original_url"`
+	Type        string `json:"type"`
+	Version     string `json:"version"`
+}
