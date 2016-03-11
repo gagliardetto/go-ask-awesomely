@@ -48,10 +48,34 @@ func (client *Client) Do(ff Form) (Response, error) {
 
 	fmt.Println(string(response))
 
-	var resp Response
-	err = json.Unmarshal(response, &resp)
+	var formInfo Response
+	err = json.Unmarshal(response, &formInfo)
 	if err != nil {
 		return Response{}, err
 	}
-	return resp, nil
+	return formInfo, nil
+}
+
+func (client *Client) GetForm(formID string) (Response, error) {
+
+	path := fmt.Sprintf("/%v/form/%v", client.APIVersion, formID)
+	method := "GET"
+
+	headers := http.Header{}
+	queryParameters := url.Values{}
+	var bodyPayload interface{}
+
+	response, _, err := client.fetchAndReturnPage(path, method, headers, queryParameters, bodyPayload)
+	if err != nil {
+		return Response{}, err
+	}
+
+	fmt.Println(string(response))
+
+	var formInfo Response
+	err = json.Unmarshal(response, &formInfo)
+	if err != nil {
+		return Response{}, err
+	}
+	return formInfo, nil
 }
