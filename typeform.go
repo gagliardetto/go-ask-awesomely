@@ -22,8 +22,6 @@ func (client *Client) BaseInfo() (BaseInfo, error) {
 		return BaseInfo{}, err
 	}
 
-	fmt.Println(string(response))
-
 	var baseInfo BaseInfo
 	err = json.Unmarshal(response, &baseInfo)
 	if err != nil {
@@ -46,8 +44,6 @@ func (client *Client) CreateForm(newForm Form) (FormInfo, error) {
 		return FormInfo{}, err
 	}
 
-	fmt.Println(string(response))
-
 	var formInfo FormInfo
 	err = json.Unmarshal(response, &formInfo)
 	if err != nil {
@@ -69,8 +65,6 @@ func (client *Client) GetForm(formID string) (FormInfo, error) {
 	if err != nil {
 		return FormInfo{}, err
 	}
-
-	fmt.Println(string(response))
 
 	var formInfo FormInfo
 	err = json.Unmarshal(response, &formInfo)
@@ -100,8 +94,6 @@ func (client *Client) CreateImage(imageURL string) (NewImage, error) {
 		return NewImage{}, err
 	}
 
-	fmt.Println(string(response))
-
 	var newImageResponse NewImage
 	err = json.Unmarshal(response, &newImageResponse)
 	if err != nil {
@@ -123,8 +115,6 @@ func (client *Client) GetImage(imageID string) (ImageInfo, error) {
 	if err != nil {
 		return ImageInfo{}, err
 	}
-
-	fmt.Println(string(response))
 
 	var imageInfo ImageInfo
 	err = json.Unmarshal(response, &imageInfo)
@@ -148,8 +138,6 @@ func (client *Client) CreateDesign(newDesign Design) (DesignInfo, error) {
 		return DesignInfo{}, err
 	}
 
-	fmt.Println(string(response))
-
 	var designInfo DesignInfo
 	err = json.Unmarshal(response, &designInfo)
 	if err != nil {
@@ -171,8 +159,6 @@ func (client *Client) GetDesign(designID string) (DesignInfo, error) {
 	if err != nil {
 		return DesignInfo{}, err
 	}
-
-	fmt.Println(string(response))
 
 	var designInfo DesignInfo
 	err = json.Unmarshal(response, &designInfo)
@@ -202,8 +188,6 @@ func (client *Client) CreateURL(formID string) (URLInfo, error) {
 		return URLInfo{}, err
 	}
 
-	fmt.Println(string(response))
-
 	var newURLResponse URLInfo
 	err = json.Unmarshal(response, &newURLResponse)
 	if err != nil {
@@ -225,8 +209,6 @@ func (client *Client) GetURL(URLID string) (URLInfo, error) {
 	if err != nil {
 		return URLInfo{}, err
 	}
-
-	fmt.Println(string(response))
 
 	var URLInfoResponse URLInfo
 	err = json.Unmarshal(response, &URLInfoResponse)
@@ -255,8 +237,6 @@ func (client *Client) ModifyURL(URLID string) (URLInfo, error) {
 	if err != nil {
 		return URLInfo{}, err
 	}
-
-	fmt.Println(string(response))
 
 	var newURLResponse URLInfo
 	err = json.Unmarshal(response, &newURLResponse)

@@ -39,7 +39,7 @@ func (client *Client) fetchAndReturnPage(path string, method string, headers htt
 		return []byte(""), http.Header{}, err
 	}
 
-	fmt.Println(requestURL.String())
+	//fmt.Println(requestURL.String())
 	request, err := http.NewRequest(method, requestURL.String(), bytes.NewBuffer(encodedBody))
 	if err != nil {
 		return []byte(""), http.Header{}, fmt.Errorf("Failed to get the URL %s: %s", requestURL, err)
@@ -82,7 +82,7 @@ func (client *Client) fetchAndReturnPage(path string, method string, headers htt
 		if err != nil {
 			return []byte(""), http.Header{}, nil
 		}
-		fmt.Println(string(responseBody))
+		//fmt.Println(string(responseBody))
 		return []byte(""), http.Header{}, fmt.Errorf("HTTPStatus %s: %s", strconv.Itoa(response.StatusCode), apiError.String())
 	}
 
