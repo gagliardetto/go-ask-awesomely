@@ -13,8 +13,8 @@ import (
 )
 
 // NewClient creates a new API client
-func NewClient(APIVersion APIVersion) (Client, error) {
-	return Client{
+func NewClient(APIVersion APIVersion) (*Client, error) {
+	return &Client{
 		httpClient: &http.Client{},
 		APIVersion: APIVersion,
 	}, nil
