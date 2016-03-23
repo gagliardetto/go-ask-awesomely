@@ -72,7 +72,7 @@ type Form struct {
 	WebhookSubmitURL string      `json:"webhook_submit_url,omitempty"` // Where you want the responses to go to when a respondent submits the typeform
 	URLIDs           []string    `json:"url_ids,omitempty"`            // The IDs of the URLs you want your form to be displayed at
 	Branding         bool        `json:"branding,omitempty"`           // Enables or disables the Typeform branding for the form
-	LogicJumps       []LogicJump `json:"logic_jumps"`
+	LogicJumps       []LogicJump `json:"logic_jumps,omitempty"`
 }
 
 type Field struct {
@@ -108,27 +108,27 @@ type Field struct {
 
 	// dropdown
 	// Choices
-	AlphabeticalOrder bool "alphabetical_order" // If the choices should be sorted in alphabetic order
+	AlphabeticalOrder bool `json:"alphabetical_order,omitempty"` // If the choices should be sorted in alphabetic order
 
 	// number
-	MinValue int "min_value" // The minimum value your respondent can answer
-	MaxValue int "max_value" // The maximum value your respondent can answer
+	MinValue int `json:"min_value,omitempty"` // The minimum value your respondent can answer
+	MaxValue int `json:"max_value,omitempty"` // The maximum value your respondent can answer
 
 	// rating
-	Steps int    "steps" // The number of steps the user can chose. Is limited to a value between 1 - 10
-	Shape string "shape" // The icon to use for the steps. Use the list in Typeform.com to get the icon you want. "Stars" in Typeform.com would be used as "stars".
+	Steps int    `json:"steps,omitempty"` // The number of steps the user can chose. Is limited to a value between 1 - 10
+	Shape string `json:"shape,omitempty"` // The icon to use for the steps. Use the list in Typeform.com to get the icon you want. "Stars" in Typeform.com would be used as "stars".
 
 	// opinion_scale
 	// Steps // required, The number of steps in the scale. Maximum is 11 and minimum is 5
-	Labels     Labels "labels"       // An object, defining left, center and right labels
-	StartAtOne bool   "start_at_one" // If the scale should start at zero or one
+	Labels     *Labels `json:"labels,omitempty"`       // An object, defining left, center and right labels
+	StartAtOne bool    `json:"start_at_one,omitempty"` // If the scale should start at zero or one
 }
 
 //
 
 type Choice struct {
 	ImageID string `json:"image_id,omitempty"`
-	Label   string `json:"label"`
+	Label   string `json:"label,omitempty"`
 }
 
 type Labels struct {
