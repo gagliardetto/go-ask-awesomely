@@ -217,10 +217,10 @@ func main() {
 
 	resp, err := client.CreateForm(newForm)
 	if err != nil {
-		fmt.Println("Do error: ", err)
+		fmt.Println("New Form error: ", err)
 		return
 	}
-	fmt.Printf("\nDo: %v\n", beautify(resp))
+	fmt.Printf("\nNew form: %v\n", beautify(resp))
 
 }
 
