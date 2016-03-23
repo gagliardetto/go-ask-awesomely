@@ -15,7 +15,7 @@ import (
 // NewClient creates a new API client
 func NewClient(APIVersion APIVersion) (*Client, error) {
 	return &Client{
-		httpClient: &http.Client{},
+		httpClient: http.DefaultClient,
 		APIVersion: APIVersion,
 	}, nil
 }
