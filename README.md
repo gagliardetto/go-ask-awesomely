@@ -255,8 +255,8 @@ func main() {
 		fmt.Println("GetForm error: ", err)
 		return
 	}
-	fmt.Printf("\nForm info: %#v\n", formInfo)
 
+	fmt.Printf("\nForm info: %#v\n", formInfo)
 }
 ```
 
@@ -280,8 +280,8 @@ func main() {
 		fmt.Println("CreateImage error: ", err)
 		return
 	}
-	fmt.Printf("\nNew image info: %#v\n", newImage)
 
+	fmt.Printf("\nNew image info: %#v\n", newImage)
 }
 ```
 
@@ -305,8 +305,8 @@ func main() {
 		fmt.Println("GetImage error: ", err)
 		return
 	}
-	fmt.Printf("\nImage info: %#v\n", imageInfo)
 
+	fmt.Printf("\nImage info: %#v\n", imageInfo)
 }
 ```
 
@@ -340,8 +340,8 @@ func main() {
 		fmt.Println("CreateDesign error: ", err)
 		return
 	}
-	fmt.Printf("\nNew design info: %#v\n", newDesignInfo)
 
+	fmt.Printf("\nNew design info: %#v\n", newDesignInfo)
 }
 ```
 
@@ -365,8 +365,8 @@ func main() {
 		fmt.Println("GetDesign error: ", err)
 		return
 	}
-	fmt.Printf("\nDesign info: %#v\n", designInfo)
 
+	fmt.Printf("\nDesign info: %#v\n", designInfo)
 }
 ```
 
@@ -390,8 +390,8 @@ func main() {
 		fmt.Println("CreateURL error: ", err)
 		return
 	}
-	fmt.Printf("\nNew form URL info: %#v\n", newFormURL)
 
+	fmt.Printf("\nNew form URL info: %#v\n", newFormURL)
 }
 ```
 
@@ -415,7 +415,32 @@ func main() {
 		fmt.Println("GetURL error: ", err)
 		return
 	}
-	fmt.Printf("\nURL info: %#v\n", URLInfo)
 
+	fmt.Printf("\nURL info: %#v\n", URLInfo)
+}
+```
+
+#### Modify URL
+
+```go
+package main
+
+import (
+	"encoding/json"
+	"fmt"
+	tf "github.com/gagliardetto/go-ask-awesomely"
+)
+
+func main() {
+	client, err := tf.NewClient(tf.Latest)
+	client.Config.APIKey = os.Getenv("TYPEFORM_API_KEY")
+
+	modifiedURLInfo, err := client.ModifyURL("<URL ID>")
+	if err != nil {
+		fmt.Println("ModifyURL error: ", err)
+		return
+	}
+	
+	fmt.Printf("\nModified URL info: %#v\n", modifiedURLInfo)
 }
 ```
