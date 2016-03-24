@@ -36,8 +36,9 @@ import (
 func main() {
 	client, err := tf.NewClient(tf.Latest)
 	if err != nil {
+		fmt.Println("client setup error: ", err)
 		return
-	}	
+	}		
 	client.Config.APIKey = os.Getenv("TYPEFORM_API_KEY")
 
 	baseInfo, err := client.BaseInfo()
@@ -64,8 +65,9 @@ import (
 func main() {
 	client, err := tf.NewClient(tf.Latest)
 	if err != nil {
+		fmt.Println("client setup error: ", err)
 		return
-	}	
+	}		
 	client.Config.APIKey = os.Getenv("TYPEFORM_API_KEY")
 
 	newForm := tf.Form{
@@ -274,8 +276,9 @@ import (
 func main() {
 	client, err := tf.NewClient(tf.Latest)
 	if err != nil {
+		fmt.Println("client setup error: ", err)
 		return
-	}	
+	}		
 	client.Config.APIKey = os.Getenv("TYPEFORM_API_KEY")
 
 	formInfo, err := client.GetForm("<form ID>")
@@ -302,8 +305,9 @@ import (
 func main() {
 	client, err := tf.NewClient(tf.Latest)
 	if err != nil {
+		fmt.Println("client setup error: ", err)
 		return
-	}	
+	}		
 	client.Config.APIKey = os.Getenv("TYPEFORM_API_KEY")
 
 	newImage, err := client.CreateImage("https://www.google.it/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png")
@@ -330,8 +334,9 @@ import (
 func main() {
 	client, err := tf.NewClient(tf.Latest)
 	if err != nil {
+		fmt.Println("client setup error: ", err)
 		return
-	}	
+	}		
 	client.Config.APIKey = os.Getenv("TYPEFORM_API_KEY")
 
 	imageInfo, err := client.GetImage("t7iWgPKgEk")
@@ -358,8 +363,9 @@ import (
 func main() {
 	client, err := tf.NewClient(tf.Latest)
 	if err != nil {
+		fmt.Println("client setup error: ", err)
 		return
-	}	
+	}		
 	client.Config.APIKey = os.Getenv("TYPEFORM_API_KEY")
 
 	newDesign := tf.Design{
@@ -396,8 +402,9 @@ import (
 func main() {
 	client, err := tf.NewClient(tf.Latest)
 	if err != nil {
+		fmt.Println("client setup error: ", err)
 		return
-	}	
+	}		
 	client.Config.APIKey = os.Getenv("TYPEFORM_API_KEY")
 
 	designInfo, err := client.GetDesign("<design ID>")
@@ -424,8 +431,9 @@ import (
 func main() {
 	client, err := tf.NewClient(tf.Latest)
 	if err != nil {
+		fmt.Println("client setup error: ", err)
 		return
-	}	
+	}		
 	client.Config.APIKey = os.Getenv("TYPEFORM_API_KEY")
 
 	newFormURL, err := client.CreateURL("<form ID>")
@@ -452,8 +460,9 @@ import (
 func main() {
 	client, err := tf.NewClient(tf.Latest)
 	if err != nil {
+		fmt.Println("client setup error: ", err)
 		return
-	}	
+	}		
 	client.Config.APIKey = os.Getenv("TYPEFORM_API_KEY")
 
 	URLInfo, err := client.GetURL("<URL ID>")
@@ -480,8 +489,9 @@ import (
 func main() {
 	client, err := tf.NewClient(tf.Latest)
 	if err != nil {
+		fmt.Println("client setup error: ", err)
 		return
-	}	
+	}		
 	client.Config.APIKey = os.Getenv("TYPEFORM_API_KEY")
 
 	modifiedURLInfo, err := client.ModifyURL("<URL ID>")
