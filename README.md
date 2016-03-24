@@ -59,32 +59,41 @@ func main() {
 	client.Config.APIKey = os.Getenv("TYPEFORM_API_KEY")
 
 	newForm := tf.Form{
-		Title:    "new form",
+		Title:    "My amazing new form",
 		Branding: true,
+
+		LogicJumps: []tf.LogicJump{
+			tf.LogicJump{
+				From: "skipper-question",
+				To:   "jump-here",
+				If:   true,
+			},
+		},
+
 		Fields: []tf.Field{
 			tf.Field{
 				Type:          tf.ShortText,
-				Question:      "what is that?",
-				Tags:          []string{"something"},
+				Question:      "What are your favorite 3 characters?",
+				Tags:          []string{"some-tag"},
 				MaxCharacters: 3,
 			},
 
 			tf.Field{
 				Type:          tf.LongText,
 				Question:      "what is the story of your life?",
-				Tags:          []string{"something"},
+				Tags:          []string{"some-tag"},
 				MaxCharacters: 3000,
 			},
 
 			tf.Field{
 				Type:                    tf.MultipleChoice,
-				Question:                "what is the story of your life?",
+				Question:                "Please select a few choices",
 				Description:             "some description",
 				AllowMultipleSelections: true,
 				Randomize:               false,
 				VerticalAlignment:       false,
 				AddOtherChoice:          true,
-				Tags:                    []string{"something"},
+				Tags:                    []string{"some-tag"},
 				Choices: []tf.Choice{
 					tf.Choice{
 						Label: "this",
@@ -108,7 +117,7 @@ func main() {
 					AllowMultipleSelections: true,
 					Randomize:               false,
 					AddOtherChoice:          true,
-					Tags:                    []string{"something"},
+					Tags:                    []string{"some-tag"},
 					Required:                true,
 					Choices: []tf.Choice{
 						tf.Choice{
@@ -130,7 +139,7 @@ func main() {
 			tf.Field{
 				Type:       tf.Statement,
 				Question:   "This is a statement",
-				Tags:       []string{"something"},
+				Tags:       []string{"some-tag"},
 				ButtonText: "Ok",
 				HideMarks:  false,
 			},
@@ -138,7 +147,7 @@ func main() {
 			tf.Field{
 				Type:     tf.Dropdown,
 				Question: "Choose from dropdown",
-				Tags:     []string{"something"},
+				Tags:     []string{"some-tag"},
 				Choices: []tf.Choice{
 					tf.Choice{
 						Label: "Europe",
@@ -154,8 +163,9 @@ func main() {
 
 			tf.Field{
 				Type:     tf.YesNo,
-				Question: "Yes or no?",
-				Tags:     []string{"something"},
+				Question: "Do you wanna jump?",
+				Tags:     []string{"some-tag"},
+				Ref:      "skipper-question",
 				Required: true,
 			},
 
@@ -163,7 +173,7 @@ func main() {
 				Type:        tf.Number,
 				Question:    "How many cats do you have?",
 				Description: "some description",
-				Tags:        []string{"something"},
+				Tags:        []string{"some-tag"},
 				MinValue:    0,
 				MaxValue:    99999,
 			},
@@ -171,8 +181,9 @@ func main() {
 			tf.Field{
 				Type:        tf.Rating,
 				Question:    "Rate",
-				Description: "some description",
-				Tags:        []string{"something"},
+				Description: "You probably jumped here from yes/no question",
+				Tags:        []string{"some-tag"},
+				Ref:         "jump-here",
 				Steps:       5,
 				Shape:       "star", // Alternatives: "star", "heart", "user", "up", "crown", "cat", "dog", "circle", "flag", "droplet", "tick", "lightbulb", "trophy", "cloud", "thunderbolt", "pencil", "skull"
 			},
@@ -181,7 +192,7 @@ func main() {
 				Type:        tf.OpinionScale,
 				Question:    "Opinion scale",
 				Description: "some description",
-				Tags:        []string{"something"},
+				Tags:        []string{"some-tag"},
 				Labels: &tf.Labels{
 					Left:   "Forms suck",
 					Center: "Who cares",
@@ -193,7 +204,7 @@ func main() {
 				Type:        tf.Email,
 				Question:    "What is your email?",
 				Description: "some description",
-				Tags:        []string{"something"},
+				Tags:        []string{"some-tag"},
 				Required:    true,
 			},
 
@@ -201,7 +212,7 @@ func main() {
 				Type:        tf.Website,
 				Question:    "What is your website?",
 				Description: "some description",
-				Tags:        []string{"something"},
+				Tags:        []string{"some-tag"},
 				Required:    false,
 			},
 
@@ -209,7 +220,7 @@ func main() {
 				Type:        tf.Legal,
 				Question:    "Do you agree to our terms?",
 				Description: "some description",
-				Tags:        []string{"something"},
+				Tags:        []string{"some-tag"},
 				Required:    true,
 			},
 		},
@@ -440,7 +451,7 @@ func main() {
 		fmt.Println("ModifyURL error: ", err)
 		return
 	}
-	
+
 	fmt.Printf("\nModified URL info: %#v\n", modifiedURLInfo)
 }
 ```
