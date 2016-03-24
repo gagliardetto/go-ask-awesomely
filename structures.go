@@ -203,13 +203,15 @@ type ImageInfo struct {
 //
 
 type Design struct {
-	Colors struct {
-		Question   string `json:"question"`
-		Button     string `json:"button"`
-		Answer     string `json:"answer"`
-		Background string `json:"background"`
-	} `json:"colors"`
-	Font string `json:"font"`
+	Colors Colors `json:"colors"`
+	Font   string `json:"font"`
+}
+
+type Colors struct {
+	Question   string `json:"question"`
+	Button     string `json:"button"`
+	Answer     string `json:"answer"`
+	Background string `json:"background"`
 }
 
 type DesignInfo struct {
