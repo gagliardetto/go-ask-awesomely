@@ -6,7 +6,11 @@
 
 ## Description
 
-Go client for Typeform API.
+Go client for Typeform API. Unofficial. Pre-Alpha.
+
+## How to get an API key
+
+You can get an API key from http://typeform.io/
 
 ## Installation
 
