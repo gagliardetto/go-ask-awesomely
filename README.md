@@ -18,7 +18,7 @@ go get -u github.com/gagliardetto/go-ask-awesomely
 
 ## Examples
 
-#### Get info
+#### Get API info
 
 ```go
 package main
@@ -39,7 +39,7 @@ func main() {
 		return
 	}
 
-	fmt.Printf("\nbaseInfo: %v\n", beautify(baseInfo))
+	fmt.Printf("\nAPI info: %v\n", beautify(baseInfo))
 }
 ```
 
