@@ -65,6 +65,10 @@ func main() {
 	newForm := tf.Form{
 		Title:    "My amazing new form",
 		Branding: true,
+		//Tags:             []string{},
+		//DesignID:         "<design ID>",
+		//WebhookSubmitURL: "<webhook submit URL>",
+		//URLIDs:           []string{},		
 
 		LogicJumps: []tf.LogicJump{
 			tf.LogicJump{
