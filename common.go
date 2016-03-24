@@ -50,6 +50,7 @@ func (client *Client) fetchAndReturnPage(path string, method string, headers htt
 	request.Header.Add("Connection", "Keep-Alive")
 	request.Header.Add("Accept-Encoding", "gzip, deflate")
 	request.Header.Add("Content-Type", "application/json")
+	request.Header.Set("User-Agent", "github.com/gagliardetto/go-ask-awesomely")
 	request.Header.Add("X-API-TOKEN", client.Config.APIKey)
 
 	response, err := client.httpClient.Do(request)
