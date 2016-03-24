@@ -22,6 +22,10 @@ func NewClient(APIVersion APIVersion) (*Client, error) {
 
 func (client *Client) fetchAndReturnPage(path string, method string, headers http.Header, queryParameters url.Values, bodyPayload interface{}) ([]byte, http.Header, error) {
 
+	if client.Config.APIKey == "" {
+		return []byte(""), http.Header{}, fmt.Errorf("%s", "APIKey not provided")
+	}
+
 	domain := "https://api.typeform.io/"
 	requestURL, err := url.Parse(domain)
 	if err != nil {
