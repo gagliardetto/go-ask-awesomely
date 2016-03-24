@@ -72,7 +72,7 @@ func main() {
 
 		LogicJumps: []tf.LogicJump{
 			tf.LogicJump{
-				From: "skipper-question",
+				From: "decisive-question",
 				To:   "jump-here",
 				If:   true,
 			},
@@ -173,7 +173,7 @@ func main() {
 				Type:     tf.YesNo,
 				Question: "Do you wanna jump?",
 				Tags:     []string{"some-tag"},
-				Ref:      "skipper-question",
+				Ref:      "decisive-question",
 				Required: true,
 			},
 
