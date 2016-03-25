@@ -228,7 +228,7 @@ func (client *Client) ModifyURL(URLID string) (URLInfo, error) {
 	var bodyPayload interface{}
 
 	var newURL struct {
-		FormID string `json:"form_id"` // is it form_id or url_id ????
+		FormID string `json:"form_id"`
 	}
 	newURL.FormID = URLID
 	bodyPayload = newURL
