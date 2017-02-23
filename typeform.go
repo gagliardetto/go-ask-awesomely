@@ -7,11 +7,11 @@ import (
 	"net/url"
 )
 
-//
+// BaseInfo handles the endpoint used to get info about the API
 func (client *Client) BaseInfo() (BaseInfo, error) {
 
 	path := fmt.Sprintf("/%v/", client.APIVersion)
-	method := "GET"
+	method := http.MethodGet
 
 	headers := http.Header{}
 	queryParameters := url.Values{}
@@ -30,9 +30,10 @@ func (client *Client) BaseInfo() (BaseInfo, error) {
 	return baseInfo, nil
 }
 
+// CreateForm handles the endpoint used to get create a new form from the provided model
 func (client *Client) CreateForm(newForm Form) (FormInfo, error) {
 	path := fmt.Sprintf("/%v/forms", client.APIVersion)
-	method := "POST"
+	method := http.MethodPost
 
 	headers := http.Header{}
 	queryParameters := url.Values{}
@@ -52,10 +53,11 @@ func (client *Client) CreateForm(newForm Form) (FormInfo, error) {
 	return formInfo, nil
 }
 
+// GetForm handles the endpoint used to fetch a form by ID
 func (client *Client) GetForm(formID string) (FormInfo, error) {
 
 	path := fmt.Sprintf("/%v/forms/%v", client.APIVersion, formID)
-	method := "GET"
+	method := http.MethodGet
 
 	headers := http.Header{}
 	queryParameters := url.Values{}
@@ -74,10 +76,12 @@ func (client *Client) GetForm(formID string) (FormInfo, error) {
 	return formInfo, nil
 }
 
+// CreateImage handles the endpoint used to upload an image that
+// will be then available for use in the forms as "Picture Choices"
 func (client *Client) CreateImage(imageURL string) (NewImage, error) {
 
 	path := fmt.Sprintf("/%v/images", client.APIVersion)
-	method := "POST"
+	method := http.MethodPost
 
 	headers := http.Header{}
 	queryParameters := url.Values{}
@@ -102,10 +106,11 @@ func (client *Client) CreateImage(imageURL string) (NewImage, error) {
 	return newImageResponse, nil
 }
 
+// GetImage handles the endpoint used to get an image by ID
 func (client *Client) GetImage(imageID string) (ImageInfo, error) {
 
 	path := fmt.Sprintf("/%v/images/%v", client.APIVersion, imageID)
-	method := "GET"
+	method := http.MethodGet
 
 	headers := http.Header{}
 	queryParameters := url.Values{}
@@ -124,9 +129,11 @@ func (client *Client) GetImage(imageID string) (ImageInfo, error) {
 	return imageInfo, nil
 }
 
+// CreateDesign handles the endpoint used to create a design that will
+// be available to be used to style forms
 func (client *Client) CreateDesign(newDesign Design) (DesignInfo, error) {
 	path := fmt.Sprintf("/%v/designs", client.APIVersion)
-	method := "POST"
+	method := http.MethodPost
 
 	headers := http.Header{}
 	queryParameters := url.Values{}
@@ -146,10 +153,11 @@ func (client *Client) CreateDesign(newDesign Design) (DesignInfo, error) {
 	return designInfo, nil
 }
 
+// GetDesign handles the endpoint used to get a design
 func (client *Client) GetDesign(designID string) (DesignInfo, error) {
 
 	path := fmt.Sprintf("/%v/designs/%v", client.APIVersion, designID)
-	method := "GET"
+	method := http.MethodGet
 
 	headers := http.Header{}
 	queryParameters := url.Values{}
@@ -168,10 +176,11 @@ func (client *Client) GetDesign(designID string) (DesignInfo, error) {
 	return designInfo, nil
 }
 
+// CreateURL handles the endpoint used to create a new URL linking to a typeform
 func (client *Client) CreateURL(formID string) (URLInfo, error) {
 
 	path := fmt.Sprintf("/%v/urls", client.APIVersion)
-	method := "POST"
+	method := http.MethodPost
 
 	headers := http.Header{}
 	queryParameters := url.Values{}
@@ -196,10 +205,11 @@ func (client *Client) CreateURL(formID string) (URLInfo, error) {
 	return newURLResponse, nil
 }
 
+// GetURL handles the endpoint used to get the typeform a URL links to
 func (client *Client) GetURL(URLID string) (URLInfo, error) {
 
 	path := fmt.Sprintf("/%v/urls/%v", client.APIVersion, URLID)
-	method := "GET"
+	method := http.MethodGet
 
 	headers := http.Header{}
 	queryParameters := url.Values{}
@@ -218,10 +228,11 @@ func (client *Client) GetURL(URLID string) (URLInfo, error) {
 	return URLInfoResponse, nil
 }
 
-func (client *Client) ModifyURL(URLID string) (URLInfo, error) {
+// ModifyURL handles the endpoint used to change an existing URL to link to a different typeform
+func (client *Client) ModifyURL(URLID string, formID string) (URLInfo, error) {
 
 	path := fmt.Sprintf("/%v/urls/%v", client.APIVersion, URLID)
-	method := "PUT"
+	method := http.MethodPut
 
 	headers := http.Header{}
 	queryParameters := url.Values{}
@@ -230,7 +241,7 @@ func (client *Client) ModifyURL(URLID string) (URLInfo, error) {
 	var newURL struct {
 		FormID string `json:"form_id"`
 	}
-	newURL.FormID = URLID
+	newURL.FormID = formID
 	bodyPayload = newURL
 
 	response, _, err := client.fetchAndReturnPage(path, method, headers, queryParameters, bodyPayload)
@@ -244,4 +255,22 @@ func (client *Client) ModifyURL(URLID string) (URLInfo, error) {
 		return URLInfo{}, err
 	}
 	return newURLResponse, nil
+}
+
+// DeleteURL handles the endpoint used to delete a URL that links to a typeform
+func (client *Client) DeleteURL(URLID string) error {
+
+	path := fmt.Sprintf("/%v/urls/%v", client.APIVersion, URLID)
+	method := http.MethodDelete
+
+	headers := http.Header{}
+	queryParameters := url.Values{}
+	var bodyPayload interface{}
+
+	_, _, err := client.fetchAndReturnPage(path, method, headers, queryParameters, bodyPayload)
+	if err != nil {
+		return err
+	}
+
+	return nil
 }

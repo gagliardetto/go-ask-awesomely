@@ -494,12 +494,39 @@ func main() {
 	}		
 	client.Config.APIKey = os.Getenv("TYPEFORM_API_KEY")
 
-	modifiedURLInfo, err := client.ModifyURL("<URL ID>")
+	modifiedURLInfo, err := client.ModifyURL("<URL ID>", "<form ID>")
 	if err != nil {
 		fmt.Println("ModifyURL error: ", err)
 		return
 	}
 
 	fmt.Printf("\nModified URL info: %#v\n", modifiedURLInfo)
+}
+```
+
+#### Delete URL
+
+```go
+package main
+
+import (
+	"encoding/json"
+	"fmt"
+	tf "github.com/gagliardetto/go-ask-awesomely"
+)
+
+func main() {
+	client, err := tf.NewClient(tf.Latest)
+	if err != nil {
+		fmt.Println("client setup error: ", err)
+		return
+	}		
+	client.Config.APIKey = os.Getenv("TYPEFORM_API_KEY")
+
+	err := client.DeleteURL(URLID)
+	if err != nil {
+		fmt.Println("DeleteURL error: ", err)
+		return
+	}
 }
 ```

@@ -10,7 +10,11 @@ import (
 	"net/http"
 	"net/url"
 	"strconv"
+	"strings"
 )
+
+// APIDomain is the domain of the typeform API
+var APIDomain = "https://api.typeform.io/"
 
 // NewClient creates a new API client
 func NewClient(APIVersion APIVersion) (*Client, error) {
@@ -26,8 +30,7 @@ func (client *Client) fetchAndReturnPage(path string, method string, headers htt
 		return []byte(""), http.Header{}, fmt.Errorf("%s", "APIKey not provided")
 	}
 
-	domain := "https://api.typeform.io/"
-	requestURL, err := url.Parse(domain)
+	requestURL, err := url.Parse(APIDomain)
 	if err != nil {
 		return []byte(""), http.Header{}, err
 	}
@@ -52,7 +55,7 @@ func (client *Client) fetchAndReturnPage(path string, method string, headers htt
 	request.Header.Add("Content-Length", strconv.Itoa(len(encodedBody)))
 
 	request.Header.Add("Connection", "Keep-Alive")
-	request.Header.Add("Accept-Encoding", "gzip, deflate")
+	request.Header.Add("Accept-Encoding", "gzip")
 	request.Header.Add("Content-Type", "application/json")
 	request.Header.Add("User-Agent", "github.com/gagliardetto/go-ask-awesomely")
 	request.Header.Add("X-API-TOKEN", client.Config.APIKey)
@@ -64,15 +67,14 @@ func (client *Client) fetchAndReturnPage(path string, method string, headers htt
 	defer response.Body.Close()
 
 	var responseReader io.ReadCloser
-	switch response.Header.Get("Content-Encoding") {
-	case "gzip":
+	if strings.Contains(response.Header.Get("Content-Encoding"), "gzip") {
 		decompressedBodyReader, err := gzip.NewReader(response.Body)
 		if err != nil {
 			return []byte(""), http.Header{}, err
 		}
 		responseReader = decompressedBodyReader
 		defer responseReader.Close()
-	default:
+	} else {
 		responseReader = response.Body
 	}
 
