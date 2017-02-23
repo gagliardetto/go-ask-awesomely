@@ -25,15 +25,18 @@ type APIError struct {
 
 //
 
+// APIVersion is the type used to express an API version
 type APIVersion string
 
 const (
+	// Latest is the latest API version
 	Latest APIVersion = "latest"
-	V0_4   APIVersion = "v0.4"
+
+	// V0_4 is the 0.4 API version
+	V0_4 APIVersion = "v0.4"
 )
 
-//
-
+// BaseInfo is the response payload of a BaseInfo request
 type BaseInfo struct {
 	Name          string    `json:"name"`
 	Description   string    `json:"description"`
@@ -43,12 +46,15 @@ type BaseInfo struct {
 	Time          Timestamp `json:"time"`
 }
 
+// Timestamp is the type of a timestamp
 type Timestamp struct {
 	time.Time
 }
 
+// TimestampFormat is the format used in timestamps
 const TimestampFormat = "2006-01-02 15:04:05 +0000 UTC"
 
+// UnmarshalJSON unmarshals a Timestamp JSON
 func (ct *Timestamp) UnmarshalJSON(b []byte) error {
 	if b[0] == '"' && b[len(b)-1] == '"' {
 		b = b[1 : len(b)-1]
@@ -58,12 +64,12 @@ func (ct *Timestamp) UnmarshalJSON(b []byte) error {
 	return err
 }
 
+// MarshalJSON marshals a Timestamp to JSON
 func (ct *Timestamp) MarshalJSON() ([]byte, error) {
 	return []byte(ct.Time.Format(TimestampFormat)), nil
 }
 
-//
-
+// Form is the struct that represents a form
 type Form struct {
 	Title            string      `json:"title"`                        // required, The title of the typeform
 	Fields           []Field     `json:"fields"`                       // required, An array of Field objects
@@ -75,6 +81,7 @@ type Form struct {
 	LogicJumps       []LogicJump `json:"logic_jumps,omitempty"`
 }
 
+// Field is the struct that represents a field
 type Field struct {
 	Type        FieldType `json:"type"`                  // Required, A string describing the type of the field
 	Question    string    `json:"question"`              // Required, The main question text for the field
@@ -124,41 +131,74 @@ type Field struct {
 	StartAtOne bool    `json:"start_at_one,omitempty"` // If the scale should start at zero or one
 }
 
-//
-
+// Choice is the struct that represents a choice option
 type Choice struct {
 	ImageID string `json:"image_id,omitempty"`
 	Label   string `json:"label,omitempty"`
 }
 
+// Labels is the struct that represents the labels positioned left, center, and right
 type Labels struct {
 	Left   string `json:"left,omitempty"`
 	Center string `json:"center,omitempty"`
 	Right  string `json:"right,omitempty"`
 }
 
-//
-
+// FieldType is the type of field of a form
 type FieldType string
 
 const (
-	ShortText      FieldType = "short_text"
-	LongText       FieldType = "long_text"
+	// ShortText is the typical, standard text input that you would expect.
+	ShortText FieldType = "short_text"
+
+	// LongText : Use a long_text field when you want your user to leave
+	// answers with freely written text, longer than one line.
+	LongText FieldType = "long_text"
+
+	// MultipleChoice : The multiple_choice field is used for
+	// displaying multiple choice text based answers.
 	MultipleChoice FieldType = "multiple_choice"
-	PictureChoice  FieldType = "picture_choice"
-	Statement      FieldType = "statement"
-	Dropdown       FieldType = "dropdown"
-	YesNo          FieldType = "yes_no"
-	Number         FieldType = "number"
-	Rating         FieldType = "rating"
-	OpinionScale   FieldType = "opinion_scale"
-	Email          FieldType = "email"
-	Website        FieldType = "website"
-	Legal          FieldType = "legal"
+
+	// PictureChoice : The picture_choice field is much like the multiple_choice field,
+	// but you can also use images as choices and make your typeforms beautiful and engaging.
+	PictureChoice FieldType = "picture_choice"
+
+	// Statement : The statement field is not a question, it's just
+	// an opportunity to make conversation in your typeform.
+	Statement FieldType = "statement"
+
+	// Dropdown : The dropdown field (sometimes called a typeahead) is a select element with auto-completion.
+	// Use it when you need your respondent to choose from a long list of choices.
+	Dropdown FieldType = "dropdown"
+
+	// YesNo : The yes_no field allows the user to answer only yes or no to a question.
+	YesNo FieldType = "yes_no"
+
+	// Number : The number field is like a short_text field that only allows numbers.
+	Number FieldType = "number"
+
+	// Rating : The rating field is the best field to use if you want your users to
+	// rate anything (e.g. on a scale of 1-5) in a visual way.
+	Rating FieldType = "rating"
+
+	// OpinionScale : The opinion_scale field is the perfect field if you want to do an NPS style evaluation,
+	// or simply ask your respondents to review a product of yours, with a scale you can set yourself.
+	OpinionScale FieldType = "opinion_scale"
+
+	// Email : You want your users to give you their precious email?
+	// Then the email is just the right field for you!
+	Email FieldType = "email"
+
+	// Website : The website field is for when you want to collect a URL from your respondent.
+	// It will validate that the answer contains a URL.
+	Website FieldType = "website"
+
+	// Legal : The legal field is very similar to the yes_no field,
+	// with some minor UI differences including a smaller body text.
+	Legal FieldType = "legal"
 )
 
-//
-
+// FormInfo is the info about a form
 type FormInfo struct {
 	Links   []Link     `json:"_links"`
 	Fields  []Field    `json:"fields"`
@@ -168,19 +208,20 @@ type FormInfo struct {
 	Version APIVersion `json:"version"`
 }
 
+// Link is info about a link
 type Link struct {
 	HREF string `json:"href"`
 	REL  string `json:"rel"`
 }
 
+// URL is info about an URL
 type URL struct {
 	FormID  string     `json:"form_id"`
 	ID      string     `json:"id"`
 	Version APIVersion `json:"version"`
 }
 
-///
-
+// NewImage is info about a new image, just created
 type NewImage struct {
 	ID          string `json:"id"`
 	OriginalURL string `json:"original_url"`
@@ -188,8 +229,7 @@ type NewImage struct {
 	Version     string `json:"version"`
 }
 
-//
-
+// ImageInfo is info about an image
 type ImageInfo struct {
 	Filename string `json:"filename"`
 	Height   int    `json:"height"`
@@ -200,13 +240,13 @@ type ImageInfo struct {
 	Width    int    `json:"width"`
 }
 
-//
-
+// Design is used to create a new design
 type Design struct {
 	Colors Colors `json:"colors"`
 	Font   string `json:"font"`
 }
 
+// Colors specifies info about colors
 type Colors struct {
 	Question   string `json:"question"`
 	Button     string `json:"button"`
@@ -214,6 +254,7 @@ type Colors struct {
 	Background string `json:"background"`
 }
 
+// DesignInfo is info about a specific design
 type DesignInfo struct {
 	ID     string `json:"id"`
 	Colors struct {
@@ -226,8 +267,7 @@ type DesignInfo struct {
 	Version string `json:"version"`
 }
 
-//
-
+// URLInfo is info about a specific URL
 type URLInfo struct {
 	ID      string `json:"id"`
 	FormID  string `json:"form_id"`
@@ -235,6 +275,7 @@ type URLInfo struct {
 	Links   []Link `json:"_links"`
 }
 
+// LogicJump is a (conditional) jump from one question to another
 type LogicJump struct {
 	From string `json:"from"`
 	To   string `json:"to"`
