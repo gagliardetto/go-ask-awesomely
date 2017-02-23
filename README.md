@@ -523,7 +523,7 @@ func main() {
 	}		
 	client.Config.APIKey = os.Getenv("TYPEFORM_API_KEY")
 
-	err := client.DeleteURL(URLID)
+	err := client.DeleteURL("<URL ID>")
 	if err != nil {
 		fmt.Println("DeleteURL error: ", err)
 		return
