@@ -15,11 +15,6 @@ import (
 var (
 	APIKey string
 	client *Client
-	err    error
-)
-
-var (
-	formID string
 )
 
 func init() {
