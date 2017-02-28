@@ -30,10 +30,10 @@ func init() {
 }
 
 func getTestKey() string {
-	key := os.Getenv("TYPEFORM_KEY")
+	key := os.Getenv("TYPEFORM_TEST_API_KEY")
 
 	if len(key) == 0 {
-		panic("TYPEFORM_KEY environment variable is not set, but is needed to run tests!\n")
+		panic("TYPEFORM_TEST_API_KEY environment variable is not set, but is needed to run the tests!\n")
 	}
 
 	return key

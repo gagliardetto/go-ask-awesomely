@@ -6,11 +6,33 @@
 
 ## Description
 
-Go client for Typeform API. Unofficial. Pre-Alpha.
+Golang client for Typeform API.
+
+Unofficial.
+
+Complete API v0.4 implementation.
+
+With test suite.
 
 ## How to get an API key
 
 You can get an API key from http://typeform.io/
+
+## How to get a throw-away API key to run tests (and not pollute the actual account)
+
+- Go to http://docs.typeform.io/page/sandbox
+
+- Open Chrome Developer Tools
+
+- In the page http://docs.typeform.io/page/sandbox, click on the "Build" button. This will fire a request to the Typeform API.
+
+- In the Developer Tools, go to the `Network` tab.
+
+- Look for a `POST` request sent to `https://api.typeform.io/v0.4/forms`
+
+- In the `Request Headers` section, look for the `X-API-TOKEN` header, and copy the value; this is a valid API token you can use to run tests.
+
+- To use this token for running this golang package's tests, export the `TYPEFORM_TEST_API_KEY` environment variable, e.g. `$  export TYPEFORM_TEST_API_KEY=0a000aa00aa00a0aa00aaa0a00a0000a`
 
 ## Installation
 
