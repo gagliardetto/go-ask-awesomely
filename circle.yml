@@ -6,13 +6,14 @@ machine:
     - test -e download/$GODIST || curl -o download/$GODIST https://storage.googleapis.com/golang/$GODIST
     - sudo rm -rf /usr/local/go
     - sudo tar -C /usr/local -xzf download/$GODIST
-dependencies:
-  post:
-   - go get github.com/mattn/goveralls
-   - go install github.com/mattn/goveralls
 test:
+  pre:
+    - go get github.com/mattn/goveralls
+    - go install github.com/mattn/goveralls
   override:
-    - goveralls -package=github.com/gagliardetto/go-ask-awesomely -repotoken=$COVERALLS_REPO_TOKEN
+    - go test -v -cover -race -coverprofile=/home/ubuntu/coverage.out github.com/gagliardetto/go-ask-awesomely
+  post:
+    - /home/ubuntu/.go_workspace/bin/goveralls -coverprofile=/home/ubuntu/coverage.out -service=circle-ci -repotoken=$COVERALLS_TOKEN
 general:
   branches:
     only:
