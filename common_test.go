@@ -26,7 +26,13 @@ func init() {
 		fmt.Println("client setup error: ", err)
 		return
 	}
-	client.Config.APIKey = APIKey
+
+	token := os.Getenv("TYPEFORM_TEST_API_KEY")
+	err = client.SetAPIToken(token)
+	if err != nil {
+		fmt.Println("token error: ", err)
+		return
+	}
 }
 
 func getTestKey() string {
@@ -64,7 +70,7 @@ func TestFetchAndReturnPage(t *testing.T) {
 	var bodyPayload interface{}
 
 	// need to make the request with no URL
-	APIDomain = ""
+	APIDomain = testServer.URL
 	defer func() {
 		APIDomain = "https://api.typeform.io/"
 	}()

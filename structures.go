@@ -2,16 +2,18 @@ package typeform
 
 import (
 	"net/http"
+	"sync"
 	"time"
 )
 
 // Client is the api client
 type Client struct {
 	httpClient *http.Client
-	Config     struct {
+	config     struct {
 		APIKey string
 	}
-	APIVersion APIVersion
+	apiVersion APIVersion
+	mu         *sync.RWMutex
 }
 
 //

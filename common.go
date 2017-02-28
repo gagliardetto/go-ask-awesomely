@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"compress/gzip"
 	"encoding/json"
+	"errors"
 	"fmt"
 	"io"
 	"io/ioutil"
@@ -11,6 +12,7 @@ import (
 	"net/url"
 	"strconv"
 	"strings"
+	"sync"
 )
 
 // APIDomain is the domain of the typeform API
@@ -20,13 +22,27 @@ var APIDomain = "https://api.typeform.io/"
 func NewClient(APIVersion APIVersion) (*Client, error) {
 	return &Client{
 		httpClient: http.DefaultClient,
-		APIVersion: APIVersion,
+		apiVersion: APIVersion,
+		mu:         &sync.RWMutex{},
 	}, nil
+}
+
+// SetAPIToken sets the API token used for making the requests to the API
+func (client *Client) SetAPIToken(token string) error {
+	if token == "" {
+		return errors.New("token is empty")
+	}
+	client.mu.Lock()
+	defer client.mu.Unlock()
+
+	client.config.APIKey = token
+
+	return nil
 }
 
 func (client *Client) fetchAndReturnPage(path string, method string, headers http.Header, queryParameters url.Values, bodyPayload interface{}) ([]byte, http.Header, error) {
 
-	if client.Config.APIKey == "" {
+	if client.config.APIKey == "" {
 		return []byte(""), http.Header{}, fmt.Errorf("%s", "APIKey not provided")
 	}
 
@@ -58,7 +74,7 @@ func (client *Client) fetchAndReturnPage(path string, method string, headers htt
 	request.Header.Add("Accept-Encoding", "gzip")
 	request.Header.Add("Content-Type", "application/json")
 	request.Header.Add("User-Agent", "github.com/gagliardetto/go-ask-awesomely")
-	request.Header.Add("X-API-TOKEN", client.Config.APIKey)
+	request.Header.Add("X-API-TOKEN", client.config.APIKey)
 
 	response, err := client.httpClient.Do(request)
 	if err != nil {

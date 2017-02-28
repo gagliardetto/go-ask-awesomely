@@ -42,6 +42,13 @@ Run the following command to install the package:
 go get -u github.com/gagliardetto/go-ask-awesomely
 ```
 
+# Testing
+
+```bash
+$  export TYPEFORM_TEST_API_KEY=8a280cd49ae26a7dd78caa4c13e6460d
+$ go test -v
+```
+
 ## API Usage Examples (complete)
 
 #### Get API info
@@ -60,8 +67,14 @@ func main() {
 	if err != nil {
 		fmt.Println("client setup error: ", err)
 		return
-	}		
-	client.Config.APIKey = os.Getenv("TYPEFORM_API_KEY")
+	}
+
+	token := os.Getenv("TYPEFORM_API_KEY")
+	err = client.SetAPIToken(token)
+	if err != nil {
+		fmt.Println("token error: ", err)
+		return
+	}
 
 	baseInfo, err := client.BaseInfo()
 	if err != nil {
@@ -90,7 +103,13 @@ func main() {
 		fmt.Println("client setup error: ", err)
 		return
 	}		
-	client.Config.APIKey = os.Getenv("TYPEFORM_API_KEY")
+
+	token := os.Getenv("TYPEFORM_API_KEY")
+	err = client.SetAPIToken(token)
+	if err != nil {
+		fmt.Println("token error: ", err)
+		return
+	}
 
 	newForm := tf.Form{
 		Title:    "My amazing new form",
@@ -301,7 +320,13 @@ func main() {
 		fmt.Println("client setup error: ", err)
 		return
 	}		
-	client.Config.APIKey = os.Getenv("TYPEFORM_API_KEY")
+
+	token := os.Getenv("TYPEFORM_API_KEY")
+	err = client.SetAPIToken(token)
+	if err != nil {
+		fmt.Println("token error: ", err)
+		return
+	}
 
 	formInfo, err := client.GetForm("<form ID>")
 	if err != nil {
@@ -330,7 +355,13 @@ func main() {
 		fmt.Println("client setup error: ", err)
 		return
 	}		
-	client.Config.APIKey = os.Getenv("TYPEFORM_API_KEY")
+
+	token := os.Getenv("TYPEFORM_API_KEY")
+	err = client.SetAPIToken(token)
+	if err != nil {
+		fmt.Println("token error: ", err)
+		return
+	}
 
 	newImage, err := client.CreateImage("https://www.google.it/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png")
 	if err != nil {
@@ -359,7 +390,13 @@ func main() {
 		fmt.Println("client setup error: ", err)
 		return
 	}		
-	client.Config.APIKey = os.Getenv("TYPEFORM_API_KEY")
+
+	token := os.Getenv("TYPEFORM_API_KEY")
+	err = client.SetAPIToken(token)
+	if err != nil {
+		fmt.Println("token error: ", err)
+		return
+	}
 
 	imageInfo, err := client.GetImage("t7iWgPKgEk")
 	if err != nil {
@@ -388,7 +425,13 @@ func main() {
 		fmt.Println("client setup error: ", err)
 		return
 	}		
-	client.Config.APIKey = os.Getenv("TYPEFORM_API_KEY")
+
+	token := os.Getenv("TYPEFORM_API_KEY")
+	err = client.SetAPIToken(token)
+	if err != nil {
+		fmt.Println("token error: ", err)
+		return
+	}
 
 	newDesign := tf.Design{
 		Colors: tf.Colors{
@@ -427,7 +470,13 @@ func main() {
 		fmt.Println("client setup error: ", err)
 		return
 	}		
-	client.Config.APIKey = os.Getenv("TYPEFORM_API_KEY")
+
+	token := os.Getenv("TYPEFORM_API_KEY")
+	err = client.SetAPIToken(token)
+	if err != nil {
+		fmt.Println("token error: ", err)
+		return
+	}
 
 	designInfo, err := client.GetDesign("<design ID>")
 	if err != nil {
@@ -456,7 +505,13 @@ func main() {
 		fmt.Println("client setup error: ", err)
 		return
 	}		
-	client.Config.APIKey = os.Getenv("TYPEFORM_API_KEY")
+
+	token := os.Getenv("TYPEFORM_API_KEY")
+	err = client.SetAPIToken(token)
+	if err != nil {
+		fmt.Println("token error: ", err)
+		return
+	}
 
 	newFormURL, err := client.CreateURL("<form ID>")
 	if err != nil {
@@ -485,7 +540,13 @@ func main() {
 		fmt.Println("client setup error: ", err)
 		return
 	}		
-	client.Config.APIKey = os.Getenv("TYPEFORM_API_KEY")
+
+	token := os.Getenv("TYPEFORM_API_KEY")
+	err = client.SetAPIToken(token)
+	if err != nil {
+		fmt.Println("token error: ", err)
+		return
+	}
 
 	URLInfo, err := client.GetURL("<URL ID>")
 	if err != nil {
@@ -514,7 +575,13 @@ func main() {
 		fmt.Println("client setup error: ", err)
 		return
 	}		
-	client.Config.APIKey = os.Getenv("TYPEFORM_API_KEY")
+
+	token := os.Getenv("TYPEFORM_API_KEY")
+	err = client.SetAPIToken(token)
+	if err != nil {
+		fmt.Println("token error: ", err)
+		return
+	}
 
 	modifiedURLInfo, err := client.ModifyURL("<URL ID>", "<form ID>")
 	if err != nil {
@@ -543,7 +610,13 @@ func main() {
 		fmt.Println("client setup error: ", err)
 		return
 	}		
-	client.Config.APIKey = os.Getenv("TYPEFORM_API_KEY")
+
+	token := os.Getenv("TYPEFORM_API_KEY")
+	err = client.SetAPIToken(token)
+	if err != nil {
+		fmt.Println("token error: ", err)
+		return
+	}
 
 	err := client.DeleteURL("<URL ID>")
 	if err != nil {

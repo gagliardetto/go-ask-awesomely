@@ -10,7 +10,7 @@ import (
 // BaseInfo handles the endpoint used to get info about the API
 func (client *Client) BaseInfo() (BaseInfo, error) {
 
-	path := fmt.Sprintf("/%v/", client.APIVersion)
+	path := fmt.Sprintf("/%v/", client.apiVersion)
 	method := http.MethodGet
 
 	headers := http.Header{}
@@ -32,7 +32,7 @@ func (client *Client) BaseInfo() (BaseInfo, error) {
 
 // CreateForm handles the endpoint used to get create a new form from the provided model
 func (client *Client) CreateForm(newForm Form) (FormInfo, error) {
-	path := fmt.Sprintf("/%v/forms", client.APIVersion)
+	path := fmt.Sprintf("/%v/forms", client.apiVersion)
 	method := http.MethodPost
 
 	headers := http.Header{}
@@ -56,7 +56,7 @@ func (client *Client) CreateForm(newForm Form) (FormInfo, error) {
 // GetForm handles the endpoint used to fetch a form by ID
 func (client *Client) GetForm(formID string) (FormInfo, error) {
 
-	path := fmt.Sprintf("/%v/forms/%v", client.APIVersion, formID)
+	path := fmt.Sprintf("/%v/forms/%v", client.apiVersion, formID)
 	method := http.MethodGet
 
 	headers := http.Header{}
@@ -80,7 +80,7 @@ func (client *Client) GetForm(formID string) (FormInfo, error) {
 // will be then available for use in the forms as "Picture Choices"
 func (client *Client) CreateImage(imageURL string) (NewImage, error) {
 
-	path := fmt.Sprintf("/%v/images", client.APIVersion)
+	path := fmt.Sprintf("/%v/images", client.apiVersion)
 	method := http.MethodPost
 
 	headers := http.Header{}
@@ -109,7 +109,7 @@ func (client *Client) CreateImage(imageURL string) (NewImage, error) {
 // GetImage handles the endpoint used to get an image by ID
 func (client *Client) GetImage(imageID string) (ImageInfo, error) {
 
-	path := fmt.Sprintf("/%v/images/%v", client.APIVersion, imageID)
+	path := fmt.Sprintf("/%v/images/%v", client.apiVersion, imageID)
 	method := http.MethodGet
 
 	headers := http.Header{}
@@ -132,7 +132,7 @@ func (client *Client) GetImage(imageID string) (ImageInfo, error) {
 // CreateDesign handles the endpoint used to create a design that will
 // be available to be used to style forms
 func (client *Client) CreateDesign(newDesign Design) (DesignInfo, error) {
-	path := fmt.Sprintf("/%v/designs", client.APIVersion)
+	path := fmt.Sprintf("/%v/designs", client.apiVersion)
 	method := http.MethodPost
 
 	headers := http.Header{}
@@ -156,7 +156,7 @@ func (client *Client) CreateDesign(newDesign Design) (DesignInfo, error) {
 // GetDesign handles the endpoint used to get a design
 func (client *Client) GetDesign(designID string) (DesignInfo, error) {
 
-	path := fmt.Sprintf("/%v/designs/%v", client.APIVersion, designID)
+	path := fmt.Sprintf("/%v/designs/%v", client.apiVersion, designID)
 	method := http.MethodGet
 
 	headers := http.Header{}
@@ -179,7 +179,7 @@ func (client *Client) GetDesign(designID string) (DesignInfo, error) {
 // CreateURL handles the endpoint used to create a new URL linking to a typeform
 func (client *Client) CreateURL(formID string) (URLInfo, error) {
 
-	path := fmt.Sprintf("/%v/urls", client.APIVersion)
+	path := fmt.Sprintf("/%v/urls", client.apiVersion)
 	method := http.MethodPost
 
 	headers := http.Header{}
@@ -208,7 +208,7 @@ func (client *Client) CreateURL(formID string) (URLInfo, error) {
 // GetURL handles the endpoint used to get the typeform a URL links to
 func (client *Client) GetURL(URLID string) (URLInfo, error) {
 
-	path := fmt.Sprintf("/%v/urls/%v", client.APIVersion, URLID)
+	path := fmt.Sprintf("/%v/urls/%v", client.apiVersion, URLID)
 	method := http.MethodGet
 
 	headers := http.Header{}
@@ -231,7 +231,7 @@ func (client *Client) GetURL(URLID string) (URLInfo, error) {
 // ModifyURL handles the endpoint used to change an existing URL to link to a different typeform
 func (client *Client) ModifyURL(URLID string, formID string) (URLInfo, error) {
 
-	path := fmt.Sprintf("/%v/urls/%v", client.APIVersion, URLID)
+	path := fmt.Sprintf("/%v/urls/%v", client.apiVersion, URLID)
 	method := http.MethodPut
 
 	headers := http.Header{}
@@ -260,7 +260,7 @@ func (client *Client) ModifyURL(URLID string, formID string) (URLInfo, error) {
 // DeleteURL handles the endpoint used to delete a URL that links to a typeform
 func (client *Client) DeleteURL(URLID string) error {
 
-	path := fmt.Sprintf("/%v/urls/%v", client.APIVersion, URLID)
+	path := fmt.Sprintf("/%v/urls/%v", client.apiVersion, URLID)
 	method := http.MethodDelete
 
 	headers := http.Header{}
