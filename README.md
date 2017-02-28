@@ -14,7 +14,7 @@ Complete API v0.4 implementation.
 
 With test suite.
 
-# TODO
+## TODO
 
 - Implement https://www.typeform.com/help/data-api/ (API to retrieve form responses)
 
@@ -46,7 +46,7 @@ Run the following command to install the package:
 go get -u github.com/gagliardetto/go-ask-awesomely
 ```
 
-# Testing
+## Testing
 
 ```bash
 $  export TYPEFORM_TEST_API_KEY=0a000cd00ae00a0dd00caa0c00e0000d
