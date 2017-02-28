@@ -42,7 +42,7 @@ Run the following command to install the package:
 go get -u github.com/gagliardetto/go-ask-awesomely
 ```
 
-## Examples
+## API Usage Examples (complete)
 
 #### Get API info
 
