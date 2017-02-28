@@ -11,7 +11,9 @@ test:
     - go get github.com/mattn/goveralls
     - go install github.com/mattn/goveralls
   override:
-    - /home/ubuntu/.go_workspace/bin/goveralls -package=github.com/gagliardetto/go-ask-awesomely -service=circle-ci -repotoken=$COVERALLS_TOKEN
+    - go test -v -cover -race -coverprofile=/home/ubuntu/coverage.out github.com/gagliardetto/go-ask-awesomely
+  post:
+    - /home/ubuntu/.go_workspace/bin/goveralls -coverprofile=/home/ubuntu/coverage.out -service=circle-ci -repotoken=$COVERALLS_TOKEN
 general:
   branches:
     only:
