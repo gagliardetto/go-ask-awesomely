@@ -8,7 +8,7 @@ import (
 )
 
 // BaseInfo handles the endpoint used to get info about the API
-func (client *Client) BaseInfo() (BaseInfo, error) {
+func (client *Client) BaseInfo() (*BaseInfo, error) {
 
 	path := fmt.Sprintf("/%v/", client.apiVersion)
 	method := http.MethodGet
@@ -19,19 +19,19 @@ func (client *Client) BaseInfo() (BaseInfo, error) {
 
 	response, _, err := client.fetchAndReturnPage(path, method, headers, queryParameters, bodyPayload)
 	if err != nil {
-		return BaseInfo{}, err
+		return nil, err
 	}
 
 	var baseInfo BaseInfo
 	err = json.Unmarshal(response, &baseInfo)
 	if err != nil {
-		return BaseInfo{}, err
+		return nil, err
 	}
-	return baseInfo, nil
+	return &baseInfo, nil
 }
 
 // CreateForm handles the endpoint used to get create a new form from the provided model
-func (client *Client) CreateForm(newForm Form) (FormInfo, error) {
+func (client *Client) CreateForm(newForm Form) (*FormInfo, error) {
 	path := fmt.Sprintf("/%v/forms", client.apiVersion)
 	method := http.MethodPost
 
@@ -42,19 +42,19 @@ func (client *Client) CreateForm(newForm Form) (FormInfo, error) {
 
 	response, _, err := client.fetchAndReturnPage(path, method, headers, queryParameters, bodyPayload)
 	if err != nil {
-		return FormInfo{}, err
+		return nil, err
 	}
 
 	var formInfo FormInfo
 	err = json.Unmarshal(response, &formInfo)
 	if err != nil {
-		return FormInfo{}, err
+		return nil, err
 	}
-	return formInfo, nil
+	return &formInfo, nil
 }
 
 // GetForm handles the endpoint used to fetch a form by ID
-func (client *Client) GetForm(formID string) (FormInfo, error) {
+func (client *Client) GetForm(formID string) (*FormInfo, error) {
 
 	path := fmt.Sprintf("/%v/forms/%v", client.apiVersion, formID)
 	method := http.MethodGet
@@ -65,20 +65,20 @@ func (client *Client) GetForm(formID string) (FormInfo, error) {
 
 	response, _, err := client.fetchAndReturnPage(path, method, headers, queryParameters, bodyPayload)
 	if err != nil {
-		return FormInfo{}, err
+		return nil, err
 	}
 
 	var formInfo FormInfo
 	err = json.Unmarshal(response, &formInfo)
 	if err != nil {
-		return FormInfo{}, err
+		return nil, err
 	}
-	return formInfo, nil
+	return &formInfo, nil
 }
 
 // CreateImage handles the endpoint used to upload an image that
 // will be then available for use in the forms as "Picture Choices"
-func (client *Client) CreateImage(imageURL string) (NewImage, error) {
+func (client *Client) CreateImage(imageURL string) (*NewImage, error) {
 
 	path := fmt.Sprintf("/%v/images", client.apiVersion)
 	method := http.MethodPost
@@ -95,19 +95,19 @@ func (client *Client) CreateImage(imageURL string) (NewImage, error) {
 
 	response, _, err := client.fetchAndReturnPage(path, method, headers, queryParameters, bodyPayload)
 	if err != nil {
-		return NewImage{}, err
+		return nil, err
 	}
 
 	var newImageResponse NewImage
 	err = json.Unmarshal(response, &newImageResponse)
 	if err != nil {
-		return NewImage{}, err
+		return nil, err
 	}
-	return newImageResponse, nil
+	return &newImageResponse, nil
 }
 
 // GetImage handles the endpoint used to get an image by ID
-func (client *Client) GetImage(imageID string) (ImageInfo, error) {
+func (client *Client) GetImage(imageID string) (*ImageInfo, error) {
 
 	path := fmt.Sprintf("/%v/images/%v", client.apiVersion, imageID)
 	method := http.MethodGet
@@ -118,20 +118,20 @@ func (client *Client) GetImage(imageID string) (ImageInfo, error) {
 
 	response, _, err := client.fetchAndReturnPage(path, method, headers, queryParameters, bodyPayload)
 	if err != nil {
-		return ImageInfo{}, err
+		return nil, err
 	}
 
 	var imageInfo ImageInfo
 	err = json.Unmarshal(response, &imageInfo)
 	if err != nil {
-		return ImageInfo{}, err
+		return nil, err
 	}
-	return imageInfo, nil
+	return &imageInfo, nil
 }
 
 // CreateDesign handles the endpoint used to create a design that will
 // be available to be used to style forms
-func (client *Client) CreateDesign(newDesign Design) (DesignInfo, error) {
+func (client *Client) CreateDesign(newDesign Design) (*DesignInfo, error) {
 	path := fmt.Sprintf("/%v/designs", client.apiVersion)
 	method := http.MethodPost
 
@@ -142,19 +142,19 @@ func (client *Client) CreateDesign(newDesign Design) (DesignInfo, error) {
 
 	response, _, err := client.fetchAndReturnPage(path, method, headers, queryParameters, bodyPayload)
 	if err != nil {
-		return DesignInfo{}, err
+		return nil, err
 	}
 
 	var designInfo DesignInfo
 	err = json.Unmarshal(response, &designInfo)
 	if err != nil {
-		return DesignInfo{}, err
+		return nil, err
 	}
-	return designInfo, nil
+	return &designInfo, nil
 }
 
 // GetDesign handles the endpoint used to get a design
-func (client *Client) GetDesign(designID string) (DesignInfo, error) {
+func (client *Client) GetDesign(designID string) (*DesignInfo, error) {
 
 	path := fmt.Sprintf("/%v/designs/%v", client.apiVersion, designID)
 	method := http.MethodGet
@@ -165,19 +165,19 @@ func (client *Client) GetDesign(designID string) (DesignInfo, error) {
 
 	response, _, err := client.fetchAndReturnPage(path, method, headers, queryParameters, bodyPayload)
 	if err != nil {
-		return DesignInfo{}, err
+		return nil, err
 	}
 
 	var designInfo DesignInfo
 	err = json.Unmarshal(response, &designInfo)
 	if err != nil {
-		return DesignInfo{}, err
+		return nil, err
 	}
-	return designInfo, nil
+	return &designInfo, nil
 }
 
 // CreateURL handles the endpoint used to create a new URL linking to a typeform
-func (client *Client) CreateURL(formID string) (URLInfo, error) {
+func (client *Client) CreateURL(formID string) (*URLInfo, error) {
 
 	path := fmt.Sprintf("/%v/urls", client.apiVersion)
 	method := http.MethodPost
@@ -194,19 +194,19 @@ func (client *Client) CreateURL(formID string) (URLInfo, error) {
 
 	response, _, err := client.fetchAndReturnPage(path, method, headers, queryParameters, bodyPayload)
 	if err != nil {
-		return URLInfo{}, err
+		return nil, err
 	}
 
 	var newURLResponse URLInfo
 	err = json.Unmarshal(response, &newURLResponse)
 	if err != nil {
-		return URLInfo{}, err
+		return nil, err
 	}
-	return newURLResponse, nil
+	return &newURLResponse, nil
 }
 
 // GetURL handles the endpoint used to get the typeform a URL links to
-func (client *Client) GetURL(URLID string) (URLInfo, error) {
+func (client *Client) GetURL(URLID string) (*URLInfo, error) {
 
 	path := fmt.Sprintf("/%v/urls/%v", client.apiVersion, URLID)
 	method := http.MethodGet
@@ -217,19 +217,19 @@ func (client *Client) GetURL(URLID string) (URLInfo, error) {
 
 	response, _, err := client.fetchAndReturnPage(path, method, headers, queryParameters, bodyPayload)
 	if err != nil {
-		return URLInfo{}, err
+		return nil, err
 	}
 
 	var URLInfoResponse URLInfo
 	err = json.Unmarshal(response, &URLInfoResponse)
 	if err != nil {
-		return URLInfo{}, err
+		return nil, err
 	}
-	return URLInfoResponse, nil
+	return &URLInfoResponse, nil
 }
 
 // ModifyURL handles the endpoint used to change an existing URL to link to a different typeform
-func (client *Client) ModifyURL(URLID string, formID string) (URLInfo, error) {
+func (client *Client) ModifyURL(URLID string, formID string) (*URLInfo, error) {
 
 	path := fmt.Sprintf("/%v/urls/%v", client.apiVersion, URLID)
 	method := http.MethodPut
@@ -246,15 +246,15 @@ func (client *Client) ModifyURL(URLID string, formID string) (URLInfo, error) {
 
 	response, _, err := client.fetchAndReturnPage(path, method, headers, queryParameters, bodyPayload)
 	if err != nil {
-		return URLInfo{}, err
+		return nil, err
 	}
 
 	var newURLResponse URLInfo
 	err = json.Unmarshal(response, &newURLResponse)
 	if err != nil {
-		return URLInfo{}, err
+		return nil, err
 	}
-	return newURLResponse, nil
+	return &newURLResponse, nil
 }
 
 // DeleteURL handles the endpoint used to delete a URL that links to a typeform

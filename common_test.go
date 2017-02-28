@@ -84,6 +84,7 @@ func TestFetchAndReturnPage(t *testing.T) {
 func TestBaseInfo(t *testing.T) {
 	baseInfo, err := client.BaseInfo()
 	assert.Nil(t, err, "no error should occur")
+	assert.NotNil(t, baseInfo, "returned response object pointer should not be nil")
 
 	fmt.Printf("\nAPI info: %#v\n", baseInfo)
 }
@@ -262,8 +263,8 @@ func TestCreateForm(t *testing.T) {
 	}
 
 	resp, err := client.CreateForm(newForm)
-
 	assert.Nil(t, err, "no error should occur")
+	assert.NotNil(t, resp, "returned response object pointer should not be nil")
 
 	fmt.Printf("\nNew form: %v\n", beautify(resp))
 
@@ -274,6 +275,7 @@ func TestCreateForm(t *testing.T) {
 func _TestGetForm(t *testing.T, formID string) {
 	formInfo, err := client.GetForm(formID)
 	assert.Nil(t, err, "no error should occur")
+	assert.NotNil(t, formInfo, "returned response object pointer should not be nil")
 
 	fmt.Printf("\nForm info: %#v\n", formInfo)
 }
@@ -281,6 +283,7 @@ func _TestGetForm(t *testing.T, formID string) {
 func TestCreateImage(t *testing.T) {
 	newImage, err := client.CreateImage("https://www.google.it/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png")
 	assert.Nil(t, err, "no error should occur")
+	assert.NotNil(t, newImage, "returned response object pointer should not be nil")
 
 	fmt.Printf("\nNew image info: %#v\n", newImage)
 
@@ -290,6 +293,7 @@ func TestCreateImage(t *testing.T) {
 func _TestGetImage(t *testing.T, imageID string) {
 	imageInfo, err := client.GetImage(imageID)
 	assert.Nil(t, err, "no error should occur")
+	assert.NotNil(t, imageInfo, "returned response object pointer should not be nil")
 
 	fmt.Printf("\nImage info: %#v\n", imageInfo)
 }
@@ -307,6 +311,7 @@ func TestCreateDesign(t *testing.T) {
 
 	newDesignInfo, err := client.CreateDesign(newDesign)
 	assert.Nil(t, err, "no error should occur")
+	assert.NotNil(t, newDesignInfo, "returned response object pointer should not be nil")
 
 	fmt.Printf("\nNew design info: %#v\n", newDesignInfo)
 
@@ -316,6 +321,7 @@ func TestCreateDesign(t *testing.T) {
 func _TestGetDesign(t *testing.T, designID string) {
 	designInfo, err := client.GetDesign(designID)
 	assert.Nil(t, err, "no error should occur")
+	assert.NotNil(t, designInfo, "returned response object pointer should not be nil")
 
 	fmt.Printf("\nDesign info: %#v\n", designInfo)
 }
@@ -323,6 +329,7 @@ func _TestGetDesign(t *testing.T, designID string) {
 func _TestCreateURL(t *testing.T, formID string) {
 	newFormURL, err := client.CreateURL(formID)
 	assert.Nil(t, err, "no error should occur")
+	assert.NotNil(t, newFormURL, "returned response object pointer should not be nil")
 
 	fmt.Printf("\nNew form URL info: %#v\n", newFormURL)
 
@@ -333,6 +340,7 @@ func _TestCreateURL(t *testing.T, formID string) {
 func _TestGetURL(t *testing.T, URLID string) {
 	URLInfo, err := client.GetURL(URLID)
 	assert.Nil(t, err, "no error should occur")
+	assert.NotNil(t, URLInfo, "returned response object pointer should not be nil")
 
 	fmt.Printf("\nURL info: %#v\n", URLInfo)
 }
@@ -340,6 +348,7 @@ func _TestGetURL(t *testing.T, URLID string) {
 func _TestModifyURL(t *testing.T, URLID, formID string) {
 	modifiedURLInfo, err := client.ModifyURL(URLID, formID)
 	assert.Nil(t, err, "no error should occur")
+	assert.NotNil(t, modifiedURLInfo, "returned response object pointer should not be nil")
 
 	fmt.Printf("\nModified URL info: %#v\n", modifiedURLInfo)
 
