@@ -45,7 +45,7 @@ go get -u github.com/gagliardetto/go-ask-awesomely
 # Testing
 
 ```bash
-$  export TYPEFORM_TEST_API_KEY=8a280cd49ae26a7dd78caa4c13e6460d
+$  export TYPEFORM_TEST_API_KEY=0a000cd00ae00a0dd00caa0c00e0000d
 $ go test -v
 ```
 
