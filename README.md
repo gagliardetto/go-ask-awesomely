@@ -14,6 +14,10 @@ Complete API v0.4 implementation.
 
 With test suite.
 
+# TODO
+
+- Implement https://www.typeform.com/help/data-api/ (API to retrieve form responses)
+
 ## How to get an API key
 
 You can get an API key from http://typeform.io/
