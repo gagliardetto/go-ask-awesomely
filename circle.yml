@@ -12,7 +12,7 @@ dependencies:
    - go install github.com/mattn/goveralls
 test:
   override:
-    - $GOPATH/bin/goveralls -package=github.com/gagliardetto/go-ask-awesomely -repotoken=$COVERALLS_REPO_TOKEN
+    - goveralls -package=github.com/gagliardetto/go-ask-awesomely -repotoken=$COVERALLS_REPO_TOKEN
 general:
   branches:
     only:
