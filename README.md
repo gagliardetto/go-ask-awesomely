@@ -1,5 +1,6 @@
 # go-ask-awesomely
 
+[![Coverage Status](https://coveralls.io/repos/github/gagliardetto/go-ask-awesomely/badge.svg?branch=master)](https://coveralls.io/github/gagliardetto/go-ask-awesomely?branch=master)
 [![CircleCI](https://circleci.com/gh/gagliardetto/go-ask-awesomely.svg?style=svg)](https://circleci.com/gh/gagliardetto/go-ask-awesomely)
 [![GoDoc](https://godoc.org/github.com/gagliardetto/go-ask-awesomely?status.svg)](https://godoc.org/github.com/gagliardetto/go-ask-awesomely)
 [![GitHub license](https://img.shields.io/github/license/gagliardetto/go-ask-awesomely.svg)](https://github.com/gagliardetto/go-ask-awesomely/blob/master/LICENSE)
